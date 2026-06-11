@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Bolão do 29 · Copa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="brand">
+      <span class="ball">⚽</span>
+      <div>
+        <div class="brand-name">Bolão do 29</div>
+        <div class="brand-sub">Copa do Mundo 2026 · 1ª Rodada</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div id="live-pill" class="live-pill" style="display:none"><span class="ldot"></span>AO VIVO</div>
+      <span id="upd-ts" class="upd-ts"></span>
+      <a href="entrar.html" id="btn-entrar" class="btn-entrar">+ Entrar no bolão</a>
+    </div>
+  </div>
+</header>
+
+<!-- PRÊMIO DESTAQUE -->
+<div class="premio-hero">
+  <div class="premio-hero-in">
+    <div class="premio-label">🏆 Prêmio da rodada</div>
+    <div id="premio-valor" class="premio-valor">R$ –</div>
+    <div id="premio-sub" class="premio-sub">– participantes · 100% ao vencedor</div>
+  </div>
+</div>
+
+<!-- HERO BAR -->
+<div class="hero-bar">
+  <div class="hero-in">
+    <div class="hstat"><span id="h-part" class="hn">–</span><span class="hl">participantes</span></div>
+    <div class="hsep"></div>
+    <div class="hstat"><span id="h-jogos" class="hn">24</span><span class="hl">jogos</span></div>
+    <div class="hsep"></div>
+    <div class="hstat"><span id="h-dl" class="hn" style="font-size:.95rem">–</span><span class="hl">prazo</span></div>
+    <div class="hsep"></div>
+    <div class="hstat">
+      <a href="transparencia.html" class="hn" style="font-size:.85rem;color:var(--gold);text-decoration:none">📋 Transparência</a>
+      <span class="hl">todos os palpites</span>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <div class="grid">
+
+    <!-- JOGOS -->
+    <section class="col-jogos">
+      <div class="stitle">Jogos <span class="ssub">11–17 jun 2026</span></div>
+      <div id="jogos-wrap"><div class="loading"><div class="spin"></div>Buscando placares…</div></div>
+    </section>
+
+    <!-- ASIDE -->
+    <aside class="col-aside">
+
+      <!-- RANKING -->
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">🏆 Ranking ao vivo</span>
+          <span class="badge">1ª Rodada</span>
+        </div>
+        <div id="rank-wrap"><div class="empty">Aguardando participantes…</div></div>
+        <div id="rank-premio" class="rank-premio" style="display:none">
+          Prêmio: <strong id="rank-premio-val"></strong>
+        </div>
+      </div>
+
+      <!-- REGRAS -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📋 Pontuação</span></div>
+        <div class="regras">
+          <div class="reg"><span class="pts p25">25</span><div><b>Placar exato</b><small>ex: 2×1 = 2×1</small></div></div>
+          <div class="reg"><span class="pts p10">10</span><div><b>Vencedor + gols de 1 time</b><small>resultado certo e um lado</small></div></div>
+          <div class="reg"><span class="pts p7">7</span><div><b>Só o resultado</b><small>vitória, derrota ou empate</small></div></div>
+          <div class="reg"><span class="pts p0">0</span><div><b>Errou</b><small>sem pontos</small></div></div>
+        </div>
+        <div class="reg-des">
+          <b>Desempate:</b> placares exatos → diferença de gols → hora de envio
+        </div>
+      </div>
+
+      <!-- INSCRIÇÃO -->
+      <div class="card card-green">
+        <div class="card-hd"><span class="card-title">💸 Inscrição</span></div>
+        <div class="inscr">
+          <div class="inscr-val">R$ <span id="inscr-val-num"></span> <span class="inscr-sub">por pessoa</span></div>
+          <div class="inscr-desc">100% vai pro vencedor. Sem taxa de banca.</div>
+          <div class="pix-row">
+            <span class="pix-badge">PIX</span>
+            <span id="pix-key" class="pix-key"></span>
+          </div>
+          <a href="entrar.html" class="btn-inscricao">Fazer meu palpite →</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</main>
+
+<footer class="ftr">
+  <span>Bolão do 29 · Copa 2026</span>
+  <span>Placares: <a href="https://www.sofascore.com" target="_blank">Sofascore</a> · Dados: <a href="https://supabase.com" target="_blank">Supabase</a></span>
+</footer>
+
+<script src="config.js"></script>
+<script src="jogos.js"></script>
+<script src="scores.js"></script>
+<script src="db.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

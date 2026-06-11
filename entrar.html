@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Entrar · Bolão do 29</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="brand">
+      <a href="index.html" class="back">← Voltar</a>
+      <span class="ball">⚽</span>
+      <div>
+        <div class="brand-name">Entrar no Bolão</div>
+        <div class="brand-sub">1ª Rodada · Copa 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main" style="max-width:680px;margin:0 auto">
+
+  <!-- BLOQUEADO -->
+  <div id="tela-bloq" style="display:none" class="card tela-bloq">
+    <div style="font-size:3rem">🔒</div>
+    <div class="card-title" style="font-size:1.1rem;margin:.5rem 0">Inscrições encerradas</div>
+    <p style="color:var(--muted);margin:0">O prazo encerrou 10 minutos antes do primeiro jogo.</p>
+    <a href="index.html" class="btn-inscricao" style="margin-top:1rem;display:inline-block">Ver ranking →</a>
+  </div>
+
+  <!-- FORM -->
+  <div id="tela-form">
+
+    <div id="banner-dl" class="dl-banner" style="display:none">
+      ⏱ Inscrições encerram em <strong id="dl-count"></strong>
+    </div>
+
+    <!-- PASSO 1: PERFIL + PALPITES -->
+    <div id="step-palpite">
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">👤 Seu perfil</span></div>
+        <div class="perf-wrap">
+          <div class="av-area">
+            <div class="av-preview" id="av-preview" style="background:#ccc">
+              <span id="av-init" class="av-init">?</span>
+              <img id="av-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%"/>
+            </div>
+            <div class="av-btns">
+              <label class="btn-foto" for="foto-inp">📷 Escolher foto
+                <input type="file" id="foto-inp" accept="image/*" style="display:none"/>
+              </label>
+              <button id="btn-rm" class="btn-rmfoto" style="display:none" onclick="rmFoto()">✕ Remover</button>
+            </div>
+            <p class="av-hint">Ou ficará com a inicial colorida automática</p>
+          </div>
+          <div class="fg">
+            <label class="fl" for="apelido">Apelido <span style="color:var(--red)">*</span></label>
+            <input class="fi" type="text" id="apelido" placeholder="Como te chamam…" maxlength="20"
+              oninput="onApelido(this.value)"/>
+            <span class="fh">Máx. 20 caracteres · aparecerá no ranking público</span>
+          </div>
+          <div class="pix-row" style="margin-top:.75rem">
+            <span class="pix-badge">PIX</span>
+            <span id="pix-form" class="pix-key"></span>
+          </div>
+          <p class="av-hint" style="margin:.4rem 0 0">Após salvar o palpite, você fará o PIX de <b>R$ <span id="val-entrada"></span></b> e enviará o comprovante direto aqui.</p>
+        </div>
+      </div>
+
+      <div class="stitle" style="margin:1.5rem 0 .75rem">
+        Palpites <span class="ssub">Preencha quantos quiser — os vazios não pontuam</span>
+      </div>
+      <div id="palpites-wrap"></div>
+
+      <div class="card" style="margin-top:1rem">
+        <div id="env-status" class="env-status" style="display:none"></div>
+        <button class="btn-enviar" id="btn-env" onclick="salvarPalpite()">
+          Salvar palpite e continuar →
+        </button>
+        <p style="font-size:.7rem;color:var(--muted);text-align:center;margin:.5rem 0 0">
+          Próximo passo: enviar o comprovante do PIX
+        </p>
+      </div>
+
+    </div>
+
+    <!-- PASSO 2: PIX + COMPROVANTE -->
+    <div id="step-comprovante" style="display:none">
+
+      <!-- Instrução PIX -->
+      <div class="card card-green">
+        <div class="card-hd"><span class="card-title">💸 Faça o PIX agora</span></div>
+        <div class="inscr">
+          <div class="inscr-val">R$ <span id="val-pix-step2"></span> <span class="inscr-sub">para o organizador</span></div>
+          <div class="pix-row">
+            <span class="pix-badge">PIX</span>
+            <span id="pix-step2" class="pix-key"></span>
+          </div>
+          <button class="btn-copiar" onclick="copiarPix()">📋 Copiar chave PIX</button>
+        </div>
+      </div>
+
+      <!-- Upload do comprovante -->
+      <div class="card" style="margin-top:.9rem">
+        <div class="card-hd"><span class="card-title">📎 Enviar comprovante</span></div>
+        <div class="upload-area" id="upload-area">
+
+          <!-- Drop zone -->
+          <div class="dropzone" id="dropzone"
+            onclick="document.getElementById('comprov-inp').click()"
+            ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+            <input type="file" id="comprov-inp" accept="image/*,application/pdf" style="display:none"
+              onchange="onComprovFile(this.files[0])"/>
+            <div id="drop-idle">
+              <div class="drop-icon">🧾</div>
+              <div class="drop-txt">Toque para escolher o comprovante</div>
+              <div class="drop-sub">Foto ou print do PIX · JPG, PNG ou PDF</div>
+            </div>
+            <div id="drop-preview" style="display:none">
+              <img id="prev-img" src="" alt="preview" class="prev-img"/>
+              <div id="prev-pdf" class="prev-pdf" style="display:none">📄 <span id="prev-nome"></span></div>
+              <button class="btn-rmfoto" style="margin-top:.5rem" onclick="event.stopPropagation();limparComprov()">✕ Trocar arquivo</button>
+            </div>
+          </div>
+
+          <!-- Status do upload -->
+          <div id="up-status" class="up-status" style="display:none"></div>
+
+          <!-- Botão enviar -->
+          <button class="btn-enviar" id="btn-upload" onclick="enviarComprovante()" style="margin-top:.75rem" disabled>
+            Enviar comprovante ✓
+          </button>
+          <p style="font-size:.7rem;color:var(--muted);text-align:center;margin:.5rem 0 0">
+            Arquivo enviado direto pro banco — o organizador será notificado
+          </p>
+
+        </div>
+      </div>
+
+      <!-- Pular -->
+      <div style="text-align:center;margin-top:.75rem">
+        <a href="index.html" style="font-size:.8rem;color:var(--muted)">
+          Enviar depois e ir pro ranking →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- PASSO 3: SUCESSO TOTAL -->
+    <div id="step-sucesso" style="display:none">
+      <div class="card" style="text-align:center;padding:2rem 1.5rem">
+        <div style="font-size:3rem;margin-bottom:.75rem">🎉</div>
+        <div class="card-title" style="font-size:1.1rem;margin-bottom:.5rem">Tudo certo!</div>
+        <p style="color:var(--muted);margin:0 0 1.25rem">Palpite salvo e comprovante enviado.<br/>Agora é torcer! ⚽</p>
+        <a href="index.html" class="btn-inscricao">Ver ranking ao vivo →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="ftr">
+  <span>Bolão do 29 · Copa 2026</span>
+</footer>
+
+<script src="config.js"></script>
+<script src="jogos.js"></script>
+<script src="db.js"></script>
+<script src="entrar.js"></script>
+</body>
+</html>

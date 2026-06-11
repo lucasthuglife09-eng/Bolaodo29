@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Transparência · Bolão do 29</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="brand">
+      <a href="index.html" class="back">← Voltar</a>
+      <span class="ball">⚽</span>
+      <div>
+        <div class="brand-name">Transparência</div>
+        <div class="brand-sub">Todos os palpites · Bolão do 29</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div id="live-pill" class="live-pill" style="display:none"><span class="ldot"></span>AO VIVO</div>
+      <span id="upd-ts" class="upd-ts"></span>
+    </div>
+  </div>
+</header>
+
+<!-- PRÊMIO DESTAQUE -->
+<div class="premio-hero">
+  <div class="premio-hero-in">
+    <div class="premio-label">🏆 Prêmio da rodada</div>
+    <div id="premio-valor" class="premio-valor">R$ –</div>
+    <div id="premio-sub" class="premio-sub">– participantes · 100% ao vencedor</div>
+  </div>
+</div>
+
+<main class="main" style="max-width:1100px">
+
+  <!-- FILTRO / INFO -->
+  <div class="transp-top">
+    <div class="stitle">Todos os palpites <span id="n-part" class="ssub"></span></div>
+    <div class="transp-filtros">
+      <label class="filtro-label">Ver por:</label>
+      <button class="ftab ftab-ativo" onclick="setView('pessoa')" id="ft-pessoa">Pessoa</button>
+      <button class="ftab" onclick="setView('jogo')" id="ft-jogo">Jogo</button>
+    </div>
+  </div>
+
+  <div id="transp-wrap">
+    <div class="loading"><div class="spin"></div>Carregando…</div>
+  </div>
+
+</main>
+
+<footer class="ftr">
+  <span>Bolão do 29 · Copa 2026</span>
+  <span>Sem segredos. Tudo aberto. 👁️</span>
+</footer>
+
+<script src="config.js"></script>
+<script src="jogos.js"></script>
+<script src="scores.js"></script>
+<script src="db.js"></script>
+<script src="transp.js"></script>
+</body>
+</html>
